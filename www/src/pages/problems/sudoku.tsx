@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Sudoku: FC<Props> = () => {
-  const [sudoku, setSudoku] = useState<string[][]>([
+  const initialState = [
     ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
     ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
     ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
@@ -18,9 +18,9 @@ const Sudoku: FC<Props> = () => {
     ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
     ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
     ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
-  ]);
+  ];
 
-  const [inputCells, setInputCells] = useState<boolean[][]>([
+  const initialInputCells = [
     [false, false, false, false, false, false, false, false, false],
     [false, false, false, false, false, false, false, false, false],
     [false, false, false, false, false, false, false, false, false],
@@ -30,7 +30,11 @@ const Sudoku: FC<Props> = () => {
     [false, false, false, false, false, false, false, false, false],
     [false, false, false, false, false, false, false, false, false],
     [false, false, false, false, false, false, false, false, false],
-  ]);
+  ];
+
+  const [sudoku, setSudoku] = useState<string[][]>(initialState);
+
+  const [inputCells, setInputCells] = useState<boolean[][]>(initialInputCells);
 
   const [solved, setSolved] = useState<boolean>(false);
 
@@ -44,29 +48,9 @@ const Sudoku: FC<Props> = () => {
   };
 
   const reset = () => {
-    setSudoku([
-      ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
-      ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
-      ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
-      ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
-      ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
-      ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
-      ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
-      ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
-      ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
-    ]);
+    setSudoku(initialState);
 
-    setInputCells([
-      [false, false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false, false],
-    ]);
+    setInputCells(initialInputCells);
 
     setSolved(false);
   };
