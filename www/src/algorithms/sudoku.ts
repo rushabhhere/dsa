@@ -1,3 +1,16 @@
+function isValidInput(sudoku: string[][]): boolean {
+  for (let i = 0; i < sudoku.length; i++) {
+    for (let j = 0; j < sudoku[i].length; j++) {
+      if (sudoku[i][j] !== '.') {
+        if (!isValid(sudoku, i, j, sudoku[i][j])) {
+          return false;
+        }
+      }
+    }
+  }
+  return true;
+}
+
 function solveSudoku(sudoku: string[][]): string[][] {
   const copy = sudoku.map(row => [...row]);
   solve(copy);
@@ -33,17 +46,16 @@ function isValid(
   c: string
 ): boolean {
   for (let i = 0; i < 9; i++) {
-    if (board[i][col] === c) {
+    if (i !== row && board[i][col] === c) {
       return false;
     }
-    if (board[row][i] === c) {
+    if (i !== col && board[row][i] === c) {
       return false;
     }
-    if (
-      board[3 * Math.floor(row / 3) + Math.floor(i / 3)][
-        3 * Math.floor(col / 3) + (i % 3)
-      ] === c
-    ) {
+
+    const x = 3 * Math.floor(row / 3) + Math.floor(i / 3);
+    const y = 3 * Math.floor(col / 3) + (i % 3);
+    if (x !== row && y !== col && board[x][y] === c) {
       return false;
     }
   }
@@ -51,3 +63,4 @@ function isValid(
 }
 
 export default solveSudoku;
+export { isValidInput };

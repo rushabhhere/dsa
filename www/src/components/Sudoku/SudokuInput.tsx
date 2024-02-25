@@ -25,6 +25,7 @@ const SudokuInput: FC<Props> = ({
               key={`${i}-${j}`}
               disabled={solved}
               type="text"
+              inputMode="numeric"
               className={clsx(
                 'text-center font-bold text-xl sm:text-4xl border-[1px] border-black outline-none h-[30px] sm:h-[50px]',
                 {

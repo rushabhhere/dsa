@@ -1,7 +1,7 @@
 import { useState, type FC } from 'react';
 import ProblemWrapper from '../../components/ProblemWrapper';
 import SudokuInput from '../../components/Sudoku/SudokuInput';
-import solveSudoku from '../../algorithms/sudoku';
+import solveSudoku, { isValidInput } from '../../algorithms/sudoku';
 
 interface Props {
   // props
@@ -35,8 +35,12 @@ const Sudoku: FC<Props> = () => {
   const [solved, setSolved] = useState<boolean>(false);
 
   const solve = () => {
-    setSudoku(solveSudoku(sudoku));
-    setSolved(true);
+    if (!isValidInput(sudoku)) {
+      alert('Invalid input');
+    } else {
+      setSudoku(solveSudoku(sudoku));
+      setSolved(true);
+    }
   };
 
   const reset = () => {
